@@ -1,6 +1,6 @@
 {
 	"name": "@fork-anyone/clipboard-files",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"description": "fork clipboard-files, A nodejs addon, read or write file path for clipboard, support win32 and mac osx",
 	"main": "./lib/index.js",
 	"types": "./lib/index.d.ts",
@@ -27,7 +27,8 @@
 	},
 	"scripts": {
 		"test": "node ./test",
-		"install": "node-pre-gyp install --fallback-to-build"
+		"install": "node-pre-gyp install --fallback-to-build",
+		"build_win32_x64": "node-pre-gyp rebuild --runtime=electron --target=22.3.13 --target_arch=x64 --dist-url=https://atom.io/download/electron --verbose --openssl_fips='"
 	},
 	"author": "alex.wei",
 	"license": "MIT",
