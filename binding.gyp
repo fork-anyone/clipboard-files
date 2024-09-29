@@ -1,4 +1,5 @@
 {
+	"variables":{"openssl_fips":0},
 	"targets": [{
 		"target_name": "binding",
 		"sources": [
@@ -14,7 +15,10 @@
             ],
 			'defines': [
 				'__MACOSX_CORE__',
-                '__MAC__'
+                '__MAC__',
+			],
+			'defines!': [
+				'-std=c++11'
 			],
 			'link_settings': {
 				'libraries': [
@@ -23,10 +27,13 @@
 				]
 			},
 			'xcode_settings': {
+				'ARCHS': ['x86_64'],
+				'MACOSX_DEPLOYMENT_TARGET': '10.13',
+				'EXCUTABLE_EXTENSION': 'node',
 				'GCC_ENABLE_CPP_EXCEPTIONS': 'YES',
 				'OTHER_CFLAGS': [
 					'-ObjC++',
-					'-std=c++14'
+					# '-std=c++14'
 				]
 			    }
 			}
@@ -49,9 +56,9 @@
 	}, {
 		"target_name": "action_after_build",
 		"type": "none",
-		"dependencies": ["<(module_name)"],
+		"dependencies": ["binding"],
 		"copies": [{
-			"files": [ "<(PRODUCT_DIR)/<(module_name).node" ],
+			"files": [ "<(PRODUCT_DIR)/binding.node" ],
 			"destination": "<(module_path)"
 		}]
 	}]

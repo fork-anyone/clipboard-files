@@ -1,6 +1,6 @@
 {
 	"name": "@fork-anyone/clipboard-files",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"description": "fork clipboard-files, A nodejs addon, read or write file path for clipboard, support win32 and mac osx",
 	"main": "./lib/index.js",
 	"types": "./lib/index.d.ts",
@@ -27,13 +27,23 @@
 	},
 	"scripts": {
 		"test": "node ./test",
-		"install": "node-pre-gyp install --fallback-to-build"
+		"install": "node-pre-gyp rebuild",
+		"build:node": "node-pre-gyp rebuild --target=16.17.1 --target_arch=x64",
+		"build:electron:x64": "node-pre-gyp rebuild --target=v22.3.13 --target_arch=x64 --runtime=electron --dist-url=https://npm.taobao.org/mirrors/electron",
+		"build:electron:ia32": "electron-rebuild rebuild --target=v22.3.13 --target_arch=ia32 --runtime=electron --dist-url=https://npm.taobao.org/mirrors/electron"
 	},
 	"author": "alex.wei",
 	"license": "MIT",
 	"gypfile": true,
 	"dependencies": {
-		"@fork-anyone/node-pre-gyp": "^1.0.11",
 		"nan": "^2.13.2"
+	},
+	"volta": {
+		"node": "16.17.1"
+	},
+	"devDependencies": {
+		"@mapbox/node-pre-gyp": "^1.0.11",
+		"electron": "^22.3.13",
+		"node-gyp": "^10.2.0"
 	}
 }
