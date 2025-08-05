@@ -27,7 +27,8 @@
 				]
 			},
 			'xcode_settings': {
-				'ARCHS': ['x86_64'],
+				'ARCHS': ['x86_64', 'arm64'],
+				"VALID_ARCHS": ["arm64", "x86_64"],
 				'MACOSX_DEPLOYMENT_TARGET': '10.13',
 				'EXCUTABLE_EXTENSION': 'node',
 				'GCC_ENABLE_CPP_EXCEPTIONS': 'YES',
@@ -59,7 +60,7 @@
 		"dependencies": ["binding"],
 		"copies": [{
 			"files": [ "<(PRODUCT_DIR)/binding.node" ],
-			"destination": "<(module_path)"
+			"destination": "./lib/binding/{node_abi}-{platform}-{arch}/"
 		}]
 	}]
 }

@@ -1,20 +1,7 @@
 {
 	"name": "@fork-anyone/clipboard-files",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"description": "fork clipboard-files, A nodejs addon, read or write file path for clipboard, support win32 and mac osx",
-	"main": "./lib/index.js",
-	"types": "./lib/index.d.ts",
-	"directories": {
-		"lib": "lib",
-		"test": "test"
-	},
-	"binary": {
-		"module_name": "binding",
-		"module_path": "./lib/binding/{node_abi}-{platform}-{arch}/",
-		"package_name": "{node_abi}-{platform}-{arch}.tar.gz",
-		"host": "https://github.com/alex8088/clipboard-files/releases/download/",
-		"remote_path": "v{version}"
-	},
 	"keywords": [
 		"clipboard",
 		"files",
@@ -25,25 +12,42 @@
 		"type": "git",
 		"url": "https://github.com/alex8088/clipboard-files.git"
 	},
-	"scripts": {
-		"test": "node ./test",
-		"install": "node-pre-gyp rebuild",
-		"build:node": "node-pre-gyp rebuild --target=16.17.1 --target_arch=x64",
-		"build:electron:x64": "node-pre-gyp rebuild --target=v22.3.13 --target_arch=x64 --runtime=electron --dist-url=https://npm.taobao.org/mirrors/electron",
-		"build:electron:ia32": "electron-rebuild rebuild --target=v22.3.13 --target_arch=ia32 --runtime=electron --dist-url=https://npm.taobao.org/mirrors/electron"
-	},
-	"author": "alex.wei",
 	"license": "MIT",
-	"gypfile": true,
+	"author": "alex.wei",
+	"main": "./lib/index.js",
+	"types": "./lib/index.d.ts",
+	"directories": {
+		"lib": "lib",
+		"test": "test"
+	},
+	"binary": {
+		"module_name": "binding",
+		"module_path": "./lib/binding/{node_abi}-{platform}-{arch}/",
+		"remote_path": "v{version}",
+		"package_name": "{node_abi}-{platform}-{arch}.tar.gz",
+		"host": "https://github.com/alex8088/clipboard-files/releases/download/"
+	},
+	"scripts": {
+		"build": "cd build && node -v &&  xcodebuild && cd ..",
+		"configure": "node-gyp configure --target=v22.3.13  --runtime=electron --openssl_fips='' --dist-url=https://electronjs.org/headers --python /usr/local/bin/python3 -- -f xcode",
+		"postinstall": "npm run build",
+		"publishNpm": "npm publish --registry https://registry.npmjs.org/ --access public",
+		"rebuild": "node-gyp clean && npm run configure && npm run build",
+		"test": "node ./test",
+		"build-node": "node-gyp rebuild --target=16.17.1",
+		"build-electron": "electron-rebuild --version v22.3.13 --dist-url https://npm.taobao.org/mirrors/electron",
+		"build-ia32": "electron-rebuild --version v22.3.13 --dist-url https://npm.taobao.org/mirrors/electron --arch ia32"
+	},
 	"dependencies": {
 		"nan": "^2.13.2"
-	},
-	"volta": {
-		"node": "16.17.1"
 	},
 	"devDependencies": {
 		"@mapbox/node-pre-gyp": "^1.0.11",
 		"electron": "^22.3.13",
 		"node-gyp": "^10.2.0"
-	}
+	},
+	"volta": {
+		"node": "16.17.1"
+	},
+	"gypfile": true
 }
