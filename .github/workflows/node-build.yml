@@ -1,0 +1,60 @@
+name: Node Build
+
+permissions:
+  contents: read
+  packages: write
+  actions: read
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version-file: '.nvmrc'
+        
+    - name: Set up build tools (macOS)
+      if: matrix.os == 'macos-latest'
+      run: |
+        brew update
+        brew install pkg-config
+      
+    - name: Set up build tools (Windows)
+      if: matrix.os == 'windows-latest'
+      run: |
+        npm install --global windows-build-tools
+        
+    - name: Install dependencies
+      run: npm install
+      
+    - name: Build for Node
+      run: npm run build-node
+      
+    - name: Run tests
+      run: npm test
+      
+    - name: Package Node build artifacts
+      shell: bash
+      run: |
+        mkdir -p dist/node-${{ matrix.os }}
+        cp -r lib/ build/ dist/node-${{ matrix.os }}/
+        tar -czvf node-build-${{ matrix.os }}.tar.gz -C dist/node-${{ matrix.os }} .
+        
+    - name: Upload Node build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: node-build-${{ matrix.os }}
+        path: node-build-${{ matrix.os }}.tar.gz
