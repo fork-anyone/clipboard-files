@@ -16,6 +16,16 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, windows-latest]
+        arch: [x64, arm64]
+        include:
+          - os: windows-latest
+            arch: x64
+          - os: windows-latest
+            arch: ia32
+          - os: macos-latest
+            arch: x64
+          - os: macos-latest
+            arch: arm64
     runs-on: ${{ matrix.os }}
     
     steps:
@@ -47,7 +57,12 @@ jobs:
         ELECTRON_VERSION: v22.3.13
       
     - name: Rebuild for Electron
-      run: npm run build-electron
+      run: |
+        if [[ "${{ matrix.os }}" == "windows-latest" && "${{ matrix.arch }}" == "ia32" ]]; then
+          npm run build-ia32
+        else
+          electron-rebuild --version v22.3.13 --dist-url https://npm.taobao.org/mirrors/electron --arch=${{ matrix.arch }}
+        fi
       env:
         ELECTRON_VERSION: v22.3.13
       
@@ -59,10 +74,10 @@ jobs:
       run: |
         mkdir -p dist/electron-${{ matrix.os }}
         cp -r lib/ build/ dist/electron-${{ matrix.os }}/
-        tar -czvf electron-build-${{ matrix.os }}.tar.gz -C dist/electron-${{ matrix.os }} .
+        tar -czvf electron-build-${{ matrix.os }}-${{ matrix.arch }}.tar.gz -C dist/electron-${{ matrix.os }} .
         
     - name: Upload Electron build artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: electron-build-${{ matrix.os }}
-        path: electron-build-${{ matrix.os }}.tar.gz
+        name: electron-build-${{ matrix.os }}-${{ matrix.arch }}
+        path: electron-build-${{ matrix.os }}-${{ matrix.arch }}.tar.gz

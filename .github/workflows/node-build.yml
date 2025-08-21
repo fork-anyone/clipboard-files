@@ -16,6 +16,16 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, windows-latest]
+        arch: [x64, arm64]
+        include:
+          - os: windows-latest
+            arch: x64
+          - os: windows-latest
+            arch: ia32
+          - os: macos-latest
+            arch: x64
+          - os: macos-latest
+            arch: arm64
     runs-on: ${{ matrix.os }}
     
     steps:
@@ -42,7 +52,12 @@ jobs:
       run: npm install
       
     - name: Build for Node
-      run: npm run build-node
+      run: |
+        if [[ "${{ matrix.os }}" == "windows-latest" && "${{ matrix.arch }}" == "ia32" ]]; then
+          npm run build-ia32
+        else
+          node-gyp rebuild --target=16.17.1 --arch=${{ matrix.arch }}
+        fi
       
     - name: Run tests
       run: npm test
@@ -52,10 +67,10 @@ jobs:
       run: |
         mkdir -p dist/node-${{ matrix.os }}
         cp -r lib/ build/ dist/node-${{ matrix.os }}/
-        tar -czvf node-build-${{ matrix.os }}.tar.gz -C dist/node-${{ matrix.os }} .
+        tar -czvf node-build-${{ matrix.os }}-${{ matrix.arch }}.tar.gz -C dist/node-${{ matrix.os }} .
         
     - name: Upload Node build artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: node-build-${{ matrix.os }}
-        path: node-build-${{ matrix.os }}.tar.gz
+        name: node-build-${{ matrix.os }}-${{ matrix.arch }}
+        path: node-build-${{ matrix.os }}-${{ matrix.arch }}.tar.gz
