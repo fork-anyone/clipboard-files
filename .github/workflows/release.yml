@@ -30,14 +30,14 @@ jobs:
       shell: bash
       run: |
         mkdir -p artifacts/node-builds
-        gh release download ${{ github.ref_name }} --pattern "node-build-*-${{ env.NODE_VERSION }}.tar.gz" --dir artifacts/node-builds
+        gh release download ${{ github.ref_name }} --pattern "node-build-*-${{ env.NODE_VERSION }}-*.tar.gz" --dir artifacts/node-builds
         find artifacts/node-builds -name "*.tar.gz" -exec tar -xzvf {} -C artifacts/node-builds \;
       
     - name: Download and extract Electron builds
       shell: bash
       run: |
         mkdir -p artifacts/electron-builds
-        gh release download ${{ github.ref_name }} --pattern "electron-build-*-${{ env.ELECTRON_VERSION }}.tar.gz" --dir artifacts/electron-builds
+        gh release download ${{ github.ref_name }} --pattern "electron-build-*-${{ env.ELECTRON_VERSION }}-*.tar.gz" --dir artifacts/electron-builds
         find artifacts/electron-builds -name "*.tar.gz" -exec tar -xzvf {} -C artifacts/electron-builds \;
       
     - name: Create Release
@@ -49,9 +49,14 @@ jobs:
         name: Release v${{ steps.version.outputs.version }}
         body: |
           Multi-platform build for Node.js v${{ env.NODE_VERSION }} and Electron v${{ env.ELECTRON_VERSION }}
-          - Node.js builds for Windows and macOS (x64, arm64)
-          - Electron builds for Windows and macOS (x64, arm64)
-          - Windows 32-bit (ia32) builds available
+          
+          **Supported Architectures:**
+          - macOS: x64 (Intel), arm64 (Apple Silicon)
+          - Windows: x64 (64-bit), ia32 (32-bit)
+          
+          **Build Artifacts:**
+          - node-build-<os>-<arch>-${{ env.NODE_VERSION }}.tar.gz
+          - electron-build-<os>-<arch>-${{ env.ELECTRON_VERSION }}.tar.gz
         draft: false
         prerelease: false
         files: |
