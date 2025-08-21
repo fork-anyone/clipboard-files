@@ -54,7 +54,7 @@ jobs:
         tar -czvf node-build-${{ matrix.os }}.tar.gz -C dist/node-${{ matrix.os }} .
         
     - name: Upload Node build artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: node-build-${{ matrix.os }}
         path: node-build-${{ matrix.os }}.tar.gz

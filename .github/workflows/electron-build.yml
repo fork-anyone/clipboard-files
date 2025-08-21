@@ -61,7 +61,7 @@ jobs:
         tar -czvf electron-build-${{ matrix.os }}.tar.gz -C dist/electron-${{ matrix.os }} .
         
     - name: Upload Electron build artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: electron-build-${{ matrix.os }}
         path: electron-build-${{ matrix.os }}.tar.gz
