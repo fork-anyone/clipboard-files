@@ -21,15 +21,22 @@
                     "src/clip_osx.mm"
                 ],
                 "xcode_settings": {
-                    'ARCHS': ['x86_64', 'arm64'],
-				    "VALID_ARCHS": ["arm64", "x86_64"],
+                    "ONLY_ACTIVE_ARCH": "YES",
+                    "CLANG_CXX_LANGUAGE_STANDARD": "c++14",
                     "GCC_ENABLE_CPP_EXCEPTIONS": "YES",
                     "CLANG_CXX_LIBRARY": "libc++",
-                    "MACOSX_DEPLOYMENT_TARGET": "10.9"
+                    "MACOSX_DEPLOYMENT_TARGET": "10.9",
+                    "OTHER_LDFLAGS": [
+                        "-framework Foundation",
+                        "-framework Cocoa",
+                        "-framework AppKit"
+                    ],
                 },
                 "link_settings": {
                     "libraries": [
-                        "-framework Cocoa"
+                        "-framework Foundation",
+                        "-framework Cocoa", 
+                        "-framework AppKit"
                     ]
                 }
             }],

@@ -21,15 +21,11 @@
 		"url": "https://github.com/alex8088/clipboard-files.git"
 	},
 	"scripts": {
-		"build": "npm run configure && node-gyp build --directory build && cd build && xcodebuild && cd ..",
-		"configure": "node-gyp configure --format=xcode --target=v22.3.13 --runtime=electron --dist-url=https://electronjs.org/headers --python=/usr/local/bin/python3 --generator-output=build",
-		"postinstall": "npm run build",
 		"publishNpm": "npm publish --registry https://registry.npmjs.org/ --access public",
 		"rebuild": "node-gyp clean && npm run configure && npm run build",
 		"test": "node ./test",
-		"build-node": "node-gyp rebuild --target=16.17.1",
-		"build-electron": "electron-rebuild --version v22.3.13 --dist-url https://npm.taobao.org/mirrors/electron",
-		"build-ia32": "electron-rebuild --version v22.3.13 --dist-url https://npm.taobao.org/mirrors/electron --arch ia32"
+		"build-node": "node-gyp rebuild",
+		"build-electron": "electron-rebuild --version v22.3.13 --dist-url https://npm.taobao.org/mirrors/electron"
 	},
 	"dependencies": {
 		"bindings": "^1.5.0",
