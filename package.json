@@ -28,8 +28,8 @@
 		"host": "https://github.com/alex8088/clipboard-files/releases/download/"
 	},
 	"scripts": {
-		"build": "cd build && node -v &&  xcodebuild && cd ..",
-		"configure": "node-gyp configure --target=v22.3.13  --runtime=electron --openssl_fips='' --dist-url=https://electronjs.org/headers --python /usr/local/bin/python3 -- -f xcode",
+		"build": "npm run configure && node-gyp build --directory build && cd build && xcodebuild && cd ..",
+		"configure": "node-gyp configure --format=xcode --target=v22.3.13 --runtime=electron --dist-url=https://electronjs.org/headers --python=/usr/local/bin/python3 --generator-output=build",
 		"postinstall": "npm run build",
 		"publishNpm": "npm publish --registry https://registry.npmjs.org/ --access public",
 		"rebuild": "node-gyp clean && npm run configure && npm run build",
