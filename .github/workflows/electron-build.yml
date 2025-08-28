@@ -61,7 +61,7 @@ jobs:
         if [[ "${{ matrix.os }}" == "windows-latest" && "${{ matrix.arch }}" == "ia32" ]]; then
           npm run build-ia32
         else
-          electron-rebuild --version v22.3.13 --dist-url https://npm.taobao.org/mirrors/electron --arch=${{ matrix.arch }}
+          ./node_modules/.bin/electron-rebuild --version v22.3.13 --arch=${{ matrix.arch }}
         fi
       env:
         ELECTRON_VERSION: v22.3.13

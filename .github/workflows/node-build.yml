@@ -56,7 +56,7 @@ jobs:
         if [[ "${{ matrix.os }}" == "windows-latest" && "${{ matrix.arch }}" == "ia32" ]]; then
           npm run build-ia32
         else
-          node-gyp rebuild --target=16.17.1 --arch=${{ matrix.arch }}
+          ./node_modules/.bin/node-gyp rebuild --target=16.17.1 --arch=${{ matrix.arch }}
         fi
       
     - name: Run tests
