@@ -1,33 +1,27 @@
 {
 	"name": "@fork-anyone/clipboard-files",
-	"version": "1.0.9",
-	"description": "fork clipboard-files, A nodejs addon, read or write file path for clipboard, support win32 and mac osx",
+	"version": "3.0.0-beta.0",
+	"description": "A nodejs addon, read or write file paths for clipboard, supports win32 and mac osx",
+	"main": "lib/index.js",
+	"types": "lib/index.d.ts",
+	"files": [
+		"lib",
+		"src",
+		"binding.gyp"
+	],
+	"author": "alex.wei",
+	"license": "MIT",
 	"keywords": [
 		"clipboard",
 		"files",
-		"nwjs",
 		"electron"
 	],
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/alex8088/clipboard-files.git"
 	},
-	"license": "MIT",
-	"author": "alex.wei",
-	"main": "./lib/index.js",
-	"types": "./lib/index.d.ts",
-	"directories": {
-		"lib": "lib",
-		"test": "test"
-	},
-	"binary": {
-		"module_name": "binding",
-		"module_path": "./lib/binding/{node_abi}-{platform}-{arch}/",
-		"remote_path": "v{version}",
-		"package_name": "{node_abi}-{platform}-{arch}.tar.gz",
-		"host": "https://github.com/alex8088/clipboard-files/releases/download/"
-	},
 	"scripts": {
+		"install": "node-gyp rebuild",
 		"build": "cd build && node -v &&  xcodebuild && cd ..",
 		"configure": "node-gyp configure --target=v22.3.13  --runtime=electron --openssl_fips='' --dist-url=https://electronjs.org/headers --python /usr/local/bin/python3 -- -f xcode",
 		"postinstall": "npm run build",
@@ -39,15 +33,8 @@
 		"build-ia32": "electron-rebuild --version v22.3.13 --dist-url https://npm.taobao.org/mirrors/electron --arch ia32"
 	},
 	"dependencies": {
-		"nan": "^2.13.2"
-	},
-	"devDependencies": {
-		"@mapbox/node-pre-gyp": "^1.0.11",
-		"electron": "^22.3.13",
-		"node-gyp": "^10.2.0"
-	},
-	"volta": {
-		"node": "16.17.1"
+		"bindings": "^1.5.0",
+		"node-addon-api": "^8.3.0"
 	},
 	"gypfile": true
 }
