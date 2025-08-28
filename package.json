@@ -25,13 +25,13 @@
 		"rebuild": "node-gyp clean && npm run configure && npm run build",
 		"test": "node ./test",
 		"build-node": "node-gyp rebuild",
-		"build-electron": "electron-rebuild --version v22.3.13 --dist-url https://npm.taobao.org/mirrors/electron",
-		"build-ia32": "electron-rebuild --version v22.3.13 --dist-url https://npm.taobao.org/mirrors/electron --arch ia32"
+		"build-electron": "electron-rebuild --version v22.3.13 --dist-url https://npm.taobao.org/mirrors/electron --disable-pre-gyp-copy",
+		"build-ia32": "electron-rebuild --version v22.3.13 --dist-url https://npm.taobao.org/mirrors/electron --arch ia32  --disable-pre-gyp-copy"
 	},
 	"dependencies": {
+		"@electron/rebuild": "^3.7.2",
 		"bindings": "^1.5.0",
 		"node-addon-api": "^8.3.0",
 		"node-gyp": "^11.4.2"
-	},
-	"gypfile": true
+	}
 }

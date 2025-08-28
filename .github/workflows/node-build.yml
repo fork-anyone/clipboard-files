@@ -66,7 +66,7 @@ jobs:
       shell: bash
       run: |
         mkdir -p dist/node-${{ matrix.os }}
-        cp -r lib/ build/ dist/node-${{ matrix.os }}/
+        cp -r build/Release/binding.node dist/electron-${{ matrix.os }}/
         tar -czvf node-build-${{ matrix.os }}-${{ matrix.arch }}.tar.gz -C dist/node-${{ matrix.os }} .
         
     - name: Upload Node build artifacts

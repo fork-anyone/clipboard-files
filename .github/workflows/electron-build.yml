@@ -73,7 +73,7 @@ jobs:
       shell: bash
       run: |
         mkdir -p dist/electron-${{ matrix.os }}
-        cp -r lib/ build/ dist/electron-${{ matrix.os }}/
+        cp -r build/Release/binding.node dist/electron-${{ matrix.os }}/
         tar -czvf electron-build-${{ matrix.os }}-${{ matrix.arch }}.tar.gz -C dist/electron-${{ matrix.os }} .
         
     - name: Upload Electron build artifacts
