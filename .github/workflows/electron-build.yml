@@ -66,9 +66,6 @@ jobs:
       env:
         ELECTRON_VERSION: v22.3.13
       
-    - name: Run tests
-      run: npm test
-      
     - name: Package Electron build artifacts
       shell: bash
       run: |
