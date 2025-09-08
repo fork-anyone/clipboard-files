@@ -1,6 +1,6 @@
 {
 	"name": "@fork-anyone/clipboard-files",
-	"version": "3.0.1",
+	"version": "3.0.2",
 	"description": "A nodejs addon, read or write file paths for clipboard, supports win32 and mac osx",
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
@@ -26,7 +26,6 @@
 		"test": "node ./test"
 	},
 	"dependencies": {
-		"@electron/rebuild": "^3.7.2",
 		"bindings": "^1.5.0",
 		"node-addon-api": "^8.3.0",
 		"node-gyp": "^11.4.2"
