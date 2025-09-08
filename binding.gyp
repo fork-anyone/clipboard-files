@@ -10,7 +10,8 @@
             "<!@(node -p \"require('node-addon-api').include\")"
         ],
         "defines": [
-            "NAPI_DISABLE_CPP_EXCEPTIONS"
+            "NAPI_DISABLE_CPP_EXCEPTIONS",
+            'PACKAGE_VERSION="<!@(node -p \"require(\\\"./package.json\\\").version\")"'
         ],
         "conditions": [
             ['OS=="mac"', {

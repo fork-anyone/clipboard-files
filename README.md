@@ -19,6 +19,9 @@ console.log("Files in clipboard:", files);
 
 // Write file paths to clipboard
 clipboard.writeFiles(["/path/to/file1.txt", "/path/to/file2.txt"]);
+
+// query version
+clipboard.version();
 ```
 
 ## API

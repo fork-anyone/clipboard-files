@@ -1,6 +1,6 @@
 {
 	"name": "@fork-anyone/clipboard-files",
-	"version": "3.0.0-beta.0",
+	"version": "3.0.1",
 	"description": "A nodejs addon, read or write file paths for clipboard, supports win32 and mac osx",
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
@@ -18,15 +18,12 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/alex8088/clipboard-files.git"
+		"url": "https://github.com/fork-anyone/clipboard-files"
 	},
 	"scripts": {
 		"publishNpm": "npm publish --registry https://registry.npmjs.org/ --access public",
-		"rebuild": "node-gyp clean && npm run configure && npm run build",
-		"test": "node ./test",
-		"build-node": "node-gyp rebuild",
-		"build-electron": "electron-rebuild --version v22.3.13 --disable-pre-gyp-copy",
-		"build-ia32": "electron-rebuild --version v22.3.13 --arch ia32  --disable-pre-gyp-copy"
+		"rebuild": "node-gyp clean configure build",
+		"test": "node ./test"
 	},
 	"dependencies": {
 		"@electron/rebuild": "^3.7.2",

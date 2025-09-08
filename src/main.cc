@@ -21,9 +21,21 @@ void WriteFiles(const Napi::CallbackInfo& info) {
     WriteFileNames(env, files);
 }
 
+/**
+* 获取当前包的版本信息
+*
+* @param info 回调信息对象，包含环境等信息
+* @return 返回包含版本号的字符串
+*/
+Napi::String Version(const Napi::CallbackInfo& info) {
+    Napi::Env env = info.Env();
+    return Napi::String::New(env, PACKAGE_VERSION);
+}
+
 Napi::Object Init(Napi::Env env, Napi::Object exports) {
     exports.Set("readFiles", Napi::Function::New(env, ReadFiles));
     exports.Set("writeFiles", Napi::Function::New(env, WriteFiles));
+    exports.Set("version", Napi::Function::New(env, Version));
     return exports;
 }
 
