@@ -23,7 +23,8 @@
 	"scripts": {
 		"publishNpm": "npm publish --registry https://registry.npmjs.org/ --access public",
 		"rebuild": "node-gyp clean configure build",
-		"test": "node ./test"
+		"test": "node ./test",
+		"postinstall": "node-gyp rebuild"
 	},
 	"dependencies": {
 		"bindings": "^1.5.0",

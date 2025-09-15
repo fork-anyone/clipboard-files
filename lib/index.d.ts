@@ -10,4 +10,6 @@ declare module "clipboard-files" {
    * @param files Array of file paths to write to clipboard
    */
   export function writeFiles(filePaths: string[]): void;
+
+  export function version(): string;
 }
