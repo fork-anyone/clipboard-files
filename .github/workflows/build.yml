@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, windows-latest]
-        arch: [x64, arm64]
+        arch: [x86_64, arm64]
         runtime: [node]
     runs-on: ${{ matrix.os }}
 
@@ -39,7 +39,7 @@ jobs:
           npm_config_runtime: ${{ matrix.runtime }}
           npm_config_disturl: ${{ matrix.runtime == 'electron' && 'https://electronjs.org/headers' || '' }}
 
-      - name: Run tests
+      - name: Run testsg
         run: npm test
 
       - name: Upload artifact
