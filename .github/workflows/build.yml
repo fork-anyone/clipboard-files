@@ -17,19 +17,7 @@ jobs:
       matrix:
         os: [macos-latest, windows-latest]
         arch: [x64, arm64]
-        runtime: [node, electron]
-        exclude:
-          # Windows arm64 暂不支持
-          - os: windows-latest
-            arch: arm64
-          # Electron ia32 仅 Windows
-          - os: macos-latest
-            arch: ia32
-        include:
-          # 补充 Windows ia32
-          - os: windows-latest
-            arch: ia32
-            runtime: electron
+        runtime: [node]
     runs-on: ${{ matrix.os }}
 
     steps:

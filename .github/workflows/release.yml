@@ -11,11 +11,18 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Get version
         id: version
         run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          pattern: binding-*
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
@@ -27,6 +34,6 @@ jobs:
             - 支持 Node.js 与 Electron 的跨平台原生模块
             - 包含 macOS (x64/arm64) 与 Windows (x64/ia32)
           files: |
-            build/Release/binding.node
+            artifacts/*/*
           draft: false
           prerelease: false
