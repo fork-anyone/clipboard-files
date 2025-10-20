@@ -11,5 +11,17 @@ declare module "clipboard-files" {
    */
   export function writeFiles(filePaths: string[]): void;
 
+  /**
+   * Read text from system clipboard
+   * @returns Text content from clipboard
+   */
+  export function readText(): string;
+
+  /**
+   * Write text to system clipboard
+   * @param text Text content to write to clipboard
+   */
+  export function writeText(text: string): void;
+
   export function version(): string;
 }

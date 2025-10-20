@@ -46,3 +46,26 @@ void WriteFileNames(Napi::Env env, Napi::Array files) {
         [pasteboard setPropertyList:paths forType:NSFilenamesPboardType];
     }
 }
+
+Napi::String GetText(Napi::Env env) {
+    @autoreleasepool {
+        NSPasteboard* pasteboard = [NSPasteboard generalPasteboard];
+        NSString* text = [pasteboard stringForType:NSPasteboardTypeString];
+        
+        if (text) {
+            return Napi::String::New(env, [text UTF8String]);
+        }
+        return Napi::String::New(env, "");
+    }
+}
+
+void WriteText(Napi::Env env, const Napi::String& text) {
+    @autoreleasepool {
+        std::string utf8Text = text.Utf8Value();
+        NSString* str = [NSString stringWithUTF8String:utf8Text.c_str()];
+        
+        NSPasteboard* pasteboard = [NSPasteboard generalPasteboard];
+        [pasteboard declareTypes:[NSArray arrayWithObject:NSPasteboardTypeString] owner:nil];
+        [pasteboard setString:str forType:NSPasteboardTypeString];
+    }
+}

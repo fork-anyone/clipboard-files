@@ -1,6 +1,6 @@
 {
 	"name": "@fork-anyone/clipboard-files",
-	"version": "3.0.4",
+	"version": "3.0.5",
 	"description": "A nodejs addon, read or write file paths for clipboard, supports win32 and mac osx",
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
@@ -23,7 +23,9 @@
 	"scripts": {
 		"publishNpm": "npm publish --registry https://registry.npmjs.org/ --access public",
 		"rebuild": "node-gyp clean configure build",
-		"test": "node ./test",
+		"test": "node ./test/run-tests.js",
+		"test:files": "node -e \"const c=require('./lib'); c.writeFiles([]); console.log('Files:', c.readFiles())\"",
+		"test:text": "node -e \"const c=require('./lib'); c.writeText('test'); console.log('Text:', c.readText())\"",
 		"postinstall": "node-gyp rebuild"
 	},
 	"dependencies": {

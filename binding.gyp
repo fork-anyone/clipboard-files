@@ -27,6 +27,9 @@
                     "GCC_ENABLE_CPP_EXCEPTIONS": "YES",
                     "CLANG_CXX_LIBRARY": "libc++",
                     "MACOSX_DEPLOYMENT_TARGET": "10.9",
+                    "GCC_OPTIMIZATION_LEVEL": "0",
+                    "GCC_GENERATE_DEBUGGING_SYMBOLS": "YES",
+                    "DEBUG_INFORMATION_FORMAT": "dwarf-with-dsym",
                     "OTHER_LDFLAGS": [
                         "-framework Foundation",
                         "-framework Cocoa",
@@ -50,7 +53,12 @@
                 ],
                 "msvs_settings": {
                     "VCCLCompilerTool": {
-                        "ExceptionHandling": 1
+                        "ExceptionHandling": 1,
+                        "Optimization": 0,
+                        "DebugInformationFormat": 3
+                    },
+                    "VCLinkerTool": {
+                        "GenerateDebugInformation": "true"
                     }
                 }
             }]

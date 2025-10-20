@@ -90,3 +90,44 @@ void WriteFileNames(Napi::Env env, Napi::Array files) {
         GlobalFree(hGlobal);
     }
 }
+
+Napi::String GetText(Napi::Env env) {
+    if (OpenClipboard(NULL)) {
+        HANDLE hData = GetClipboardData(CF_UNICODETEXT);
+        if (hData) {
+            wchar_t* pData = (wchar_t*)GlobalLock(hData);
+            if (pData) {
+                std::string utf8Text = WideToUtf8(pData);
+                GlobalUnlock(hData);
+                CloseClipboard();
+                return Napi::String::New(env, utf8Text);
+            }
+            GlobalUnlock(hData);
+        }
+        CloseClipboard();
+    }
+    return Napi::String::New(env, "");
+}
+
+void WriteText(Napi::Env env, const Napi::String& text) {
+    std::string utf8Text = text.Utf8Value();
+    std::wstring wText = Utf8ToWide(utf8Text);
+    
+    if (OpenClipboard(NULL)) {
+        EmptyClipboard();
+        
+        size_t size = (wText.length() + 1) * sizeof(wchar_t);
+        HGLOBAL hGlobal = GlobalAlloc(GMEM_MOVEABLE, size);
+        if (hGlobal) {
+            wchar_t* pGlobal = (wchar_t*)GlobalLock(hGlobal);
+            if (pGlobal) {
+                memcpy(pGlobal, wText.c_str(), size);
+                GlobalUnlock(hGlobal);
+                SetClipboardData(CF_UNICODETEXT, hGlobal);
+            } else {
+                GlobalFree(hGlobal);
+            }
+        }
+        CloseClipboard();
+    }
+}
