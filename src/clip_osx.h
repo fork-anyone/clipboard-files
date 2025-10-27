@@ -5,5 +5,7 @@
 
 Napi::Array GetFileNames(Napi::Env env);
 void WriteFileNames(Napi::Env env, Napi::Array files);
+Napi::String GetText(Napi::Env env);
+void WriteText(Napi::Env env, const Napi::String& text);
 
 #endif

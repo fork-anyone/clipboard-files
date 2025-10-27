@@ -1,55 +1,39 @@
-name: Create Release
+name: Release
 
 on:
-  workflow_run:
-    workflows: ["Node Build", "Electron Build"]
-    types:
-      - completed
+  push:
+    tags:
+      - 'v*'
 
 jobs:
-  create-release:
-    if: >-
-      github.event.workflow_run.conclusion == 'success' &&
-      (github.event.workflow_run.name == 'Node Build' || github.event.workflow_run.name == 'Electron Build')
+  release:
     runs-on: ubuntu-latest
-    
+    permissions:
+      contents: write
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Get version
-      id: version
-      run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
-      
-    - name: Download and extract Node builds
-      shell: bash
-      run: |
-        mkdir -p artifacts/node-builds
-        gh release download ${{ github.ref_name }} --pattern "node-build-*.tar.gz" --dir artifacts/node-builds
-        find artifacts/node-builds -name "*.tar.gz" -exec tar -xzvf {} -C artifacts/node-builds \;
-      
-    - name: Download and extract Electron builds
-      shell: bash
-      run: |
-        mkdir -p artifacts/electron-builds
-        gh release download ${{ github.ref_name }} --pattern "electron-build-*.tar.gz" --dir artifacts/electron-builds
-        find artifacts/electron-builds -name "*.tar.gz" -exec tar -xzvf {} -C artifacts/electron-builds \;
-      
-    - name: Create Release
-      uses: softprops/action-gh-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: v${{ steps.version.outputs.version }}
-        name: Release v${{ steps.version.outputs.version }}
-        body: |
-          Multi-platform build for Node.js and Electron
-          - Node.js builds for Windows and macOS
-          - Electron builds for Windows and macOS
-        draft: false
-        prerelease: false
-        files: |
-          artifacts/node-build-macos-latest/**
-          artifacts/node-build-windows-latest/**
-          artifacts/electron-build-macos-latest/**
-          artifacts/electron-build-windows-latest/**
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get version
+        id: version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          pattern: binding-*
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ steps.version.outputs.VERSION }}
+          body: |
+            ### 构建产物
+            - 支持 Node.js 与 Electron 的跨平台原生模块
+            - 包含 macOS (x64/arm64) 与 Windows (x64/ia32)
+          files: |
+            artifacts/*/*
+          draft: false
+          prerelease: false

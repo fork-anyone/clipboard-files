@@ -1,20 +1,23 @@
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
+#import <AppKit/NSPasteboard.h>  // 只引入必要的头文件
 #include "clip_osx.h"
+
+// 定义必要的常量
+#ifndef NSFilenamesPboardType
+#define NSFilenamesPboardType @"NSFilenamesPboardType"
+#endif
 
 Napi::Array GetFileNames(Napi::Env env) {
     Napi::Array result = Napi::Array::New(env);
     uint32_t index = 0;
     
     @autoreleasepool {
-        NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
-        NSArray *classes = @[[NSURL class]];
-        NSDictionary *options = @{NSPasteboardURLReadingFileURLsOnlyKey: @YES};
+        NSPasteboard* pasteboard = [NSPasteboard generalPasteboard];
+        NSArray* paths = [pasteboard propertyListForType:NSFilenamesPboardType];
         
-        NSArray *urls = [pasteboard readObjectsForClasses:classes options:options];
-        if (urls) {
-            for (NSURL *url in urls) {
-                if ([url isFileURL]) {
-                    NSString *path = [url path];
+        if ([paths isKindOfClass:[NSArray class]]) {
+            for (NSString* path in paths) {
+                if ([path isKindOfClass:[NSString class]] && [path length] > 0) {
                     result.Set(index++, Napi::String::New(env, [path UTF8String]));
                 }
             }
@@ -26,25 +29,43 @@ Napi::Array GetFileNames(Napi::Env env) {
 
 void WriteFileNames(Napi::Env env, Napi::Array files) {
     @autoreleasepool {
-        NSMutableArray *urls = [NSMutableArray array];
+        NSMutableArray *paths = [NSMutableArray array];
         uint32_t length = files.Length();
-        
+
         for (uint32_t i = 0; i < length; i++) {
             Napi::Value value = files[i];
             if (value.IsString()) {
                 std::string utf8Path = value.As<Napi::String>();
                 NSString *path = [NSString stringWithUTF8String:utf8Path.c_str()];
-                NSURL *url = [NSURL fileURLWithPath:path];
-                if (url) {
-                    [urls addObject:url];
-                }
+                [paths addObject:path];
             }
         }
+
+        NSPasteboard* pasteboard = [NSPasteboard generalPasteboard];
+        [pasteboard declareTypes:[NSArray arrayWithObject:NSFilenamesPboardType] owner:nil];
+        [pasteboard setPropertyList:paths forType:NSFilenamesPboardType];
+    }
+}
+
+Napi::String GetText(Napi::Env env) {
+    @autoreleasepool {
+        NSPasteboard* pasteboard = [NSPasteboard generalPasteboard];
+        NSString* text = [pasteboard stringForType:NSPasteboardTypeString];
         
-        if ([urls count] > 0) {
-            NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
-            [pasteboard clearContents];
-            [pasteboard writeObjects:urls];
+        if (text) {
+            return Napi::String::New(env, [text UTF8String]);
         }
+        return Napi::String::New(env, "");
+    }
+}
+
+void WriteText(Napi::Env env, const Napi::String& text) {
+    @autoreleasepool {
+        std::string utf8Text = text.Utf8Value();
+        NSString* str = [NSString stringWithUTF8String:utf8Text.c_str()];
+        
+        NSPasteboard* pasteboard = [NSPasteboard generalPasteboard];
+        [pasteboard declareTypes:[NSArray arrayWithObject:NSPasteboardTypeString] owner:nil];
+        [pasteboard setString:str forType:NSPasteboardTypeString];
     }
 }

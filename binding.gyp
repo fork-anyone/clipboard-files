@@ -1,6 +1,6 @@
 {
     "targets": [{
-        "target_name": "binding",
+        "target_name": "<(module_name)",
         "cflags!": ["-fno-exceptions"],
         "cflags_cc!": ["-fno-exceptions"],
         "sources": [
@@ -10,7 +10,8 @@
             "<!@(node -p \"require('node-addon-api').include\")"
         ],
         "defines": [
-            "NAPI_DISABLE_CPP_EXCEPTIONS"
+            "NAPI_DISABLE_CPP_EXCEPTIONS",
+            'PACKAGE_VERSION="<!@(node -p \"require(\\\"./package.json\\\").version\")"'
         ],
         "conditions": [
             ['OS=="mac"', {
@@ -21,15 +22,25 @@
                     "src/clip_osx.mm"
                 ],
                 "xcode_settings": {
-                    'ARCHS': ['x86_64', 'arm64'],
-				    "VALID_ARCHS": ["arm64", "x86_64"],
+                    "ONLY_ACTIVE_ARCH": "YES",
+                    "CLANG_CXX_LANGUAGE_STANDARD": "c++14",
                     "GCC_ENABLE_CPP_EXCEPTIONS": "YES",
                     "CLANG_CXX_LIBRARY": "libc++",
-                    "MACOSX_DEPLOYMENT_TARGET": "10.9"
+                    "MACOSX_DEPLOYMENT_TARGET": "10.9",
+                    "GCC_OPTIMIZATION_LEVEL": "0",
+                    "GCC_GENERATE_DEBUGGING_SYMBOLS": "YES",
+                    "DEBUG_INFORMATION_FORMAT": "dwarf-with-dsym",
+                    "OTHER_LDFLAGS": [
+                        "-framework Foundation",
+                        "-framework Cocoa",
+                        "-framework AppKit"
+                    ],
                 },
                 "link_settings": {
                     "libraries": [
-                        "-framework Cocoa"
+                        "-framework Foundation",
+                        "-framework Cocoa", 
+                        "-framework AppKit"
                     ]
                 }
             }],
@@ -42,10 +53,27 @@
                 ],
                 "msvs_settings": {
                     "VCCLCompilerTool": {
-                        "ExceptionHandling": 1
+                        "ExceptionHandling": 1,
+                        "Optimization": 0,
+                        "DebugInformationFormat": 3
+                    },
+                    "VCLinkerTool": {
+                        "GenerateDebugInformation": "true"
                     }
                 }
             }]
         ]
-    }]
+    },
+    {
+      "target_name": "action_after_build",
+      "type": "none",
+      "dependencies": [ "<(module_name)" ],
+      "copies": [
+        {
+          "files": [ "<(PRODUCT_DIR)/<(module_name).node" ],
+          "destination": "<(module_path)"
+        }
+      ]
+    }
+    ]
 }
