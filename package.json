@@ -1,6 +1,6 @@
 {
 	"name": "@fork-anyone/clipboard-files",
-	"version": "3.0.5",
+	"version": "3.0.6",
 	"description": "A nodejs addon, read or write file paths for clipboard, supports win32 and mac osx",
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
@@ -22,15 +22,24 @@
 	},
 	"scripts": {
 		"publishNpm": "npm publish --registry https://registry.npmjs.org/ --access public",
-		"rebuild": "node-gyp clean configure build",
+		"rebuild": "node-pre-gyp rebuild",
+		"build": "node-pre-gyp rebuild && npm run copy-binary",
 		"test": "node ./test/run-tests.js",
 		"test:files": "node -e \"const c=require('./lib'); c.writeFiles([]); console.log('Files:', c.readFiles())\"",
 		"test:text": "node -e \"const c=require('./lib'); c.writeText('test'); console.log('Text:', c.readText())\"",
-		"postinstall": "node-gyp rebuild"
+		"postinstall": "node-pre-gyp install --fallback-to-build && npm run copy-binary",
+		"clean": "node-pre-gyp clean"
 	},
 	"dependencies": {
+		"@mapbox/node-pre-gyp": "^1.0.11",
 		"bindings": "^1.5.0",
-		"node-addon-api": "^8.3.0",
-		"node-gyp": "^11.4.2"
+		"node-addon-api": "^8.3.0"
+	},
+	"binary": {
+		"module_name": "clipboard-files",
+		"module_path": "./lib/binding/napi-{platform}-{arch}",
+		"remote_path": "./",
+		"package_name": "napi-{module_name}-{platform}-{arch}.tar.gz",
+		"host": "https://localhost"
 	}
 }

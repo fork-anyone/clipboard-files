@@ -1,6 +1,6 @@
 {
     "targets": [{
-        "target_name": "binding",
+        "target_name": "<(module_name)",
         "cflags!": ["-fno-exceptions"],
         "cflags_cc!": ["-fno-exceptions"],
         "sources": [
@@ -63,5 +63,17 @@
                 }
             }]
         ]
-    }]
+    },
+    {
+      "target_name": "action_after_build",
+      "type": "none",
+      "dependencies": [ "<(module_name)" ],
+      "copies": [
+        {
+          "files": [ "<(PRODUCT_DIR)/<(module_name).node" ],
+          "destination": "<(module_path)"
+        }
+      ]
+    }
+    ]
 }
