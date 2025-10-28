@@ -1,0 +1,50 @@
+---
+triple:          'x86_64-apple-darwin'
+binary-path:     './Release/clipboard-files.node'
+relocations:
+  - { offset: 0x27, size: 0x8, addend: 0x0, symName: __ZN4Napi5Error5FatalEPKcS2_, symObjAddr: 0x10, symBinAddr: 0x1580, symSize: 0x20 }
+  - { offset: 0x2BFC, size: 0x8, addend: 0x0, symName: __ZN4Napi7details23default_basic_finalizerINS0_12CallbackDataIPFNS_5ArrayERKNS_12CallbackInfoEES3_EEEEvP10napi_env__PvSC_, symObjAddr: 0x1160, symBinAddr: 0x26D0, symSize: 0x20 }
+  - { offset: 0x2C94, size: 0x8, addend: 0x0, symName: __ZN4Napi7details23default_basic_finalizerINS0_12CallbackDataIPFvRKNS_12CallbackInfoEEvEEEEvP10napi_env__PvSB_, symObjAddr: 0x1360, symBinAddr: 0x28D0, symSize: 0x20 }
+  - { offset: 0x2D2C, size: 0x8, addend: 0x0, symName: __ZN4Napi7details23default_basic_finalizerINS0_12CallbackDataIPFNS_6StringERKNS_12CallbackInfoEES3_EEEEvP10napi_env__PvSC_, symObjAddr: 0x13E0, symBinAddr: 0x2950, symSize: 0x14 }
+  - { offset: 0x11273, size: 0x8, addend: 0x0, symName: __ZN4Napi5Error5FatalEPKcS2_, symObjAddr: 0x10, symBinAddr: 0x1580, symSize: 0x20 }
+  - { offset: 0x112E3, size: 0x8, addend: 0x0, symName: __Z9ReadFilesRKN4Napi12CallbackInfoE, symObjAddr: 0x30, symBinAddr: 0x15A0, symSize: 0x10 }
+  - { offset: 0x11389, size: 0x8, addend: 0x0, symName: __Z10WriteFilesRKN4Napi12CallbackInfoE, symObjAddr: 0x40, symBinAddr: 0x15B0, symSize: 0x70 }
+  - { offset: 0x1161E, size: 0x8, addend: 0x0, symName: __ZNK4Napi5Value7IsArrayEv, symObjAddr: 0xB0, symBinAddr: 0x1620, symSize: 0xA0 }
+  - { offset: 0x1186E, size: 0x8, addend: 0x0, symName: __Z8ReadTextRKN4Napi12CallbackInfoE, symObjAddr: 0x150, symBinAddr: 0x16C0, symSize: 0x10 }
+  - { offset: 0x11904, size: 0x8, addend: 0x0, symName: __Z17WriteTextCallbackRKN4Napi12CallbackInfoE, symObjAddr: 0x160, symBinAddr: 0x16D0, symSize: 0x80 }
+  - { offset: 0x119E6, size: 0x8, addend: 0x0, symName: __Z7VersionRKN4Napi12CallbackInfoE, symObjAddr: 0x1E0, symBinAddr: 0x1750, symSize: 0x20 }
+  - { offset: 0x11A5C, size: 0x8, addend: 0x0, symName: __ZN4Napi6String3NewEP10napi_env__PKc, symObjAddr: 0x200, symBinAddr: 0x1770, symSize: 0x100 }
+  - { offset: 0x11ED1, size: 0x8, addend: 0x0, symName: __Z4InitN4Napi3EnvENS_6ObjectE, symObjAddr: 0x300, symBinAddr: 0x1870, symSize: 0x390 }
+  - { offset: 0x132F0, size: 0x8, addend: 0x0, symName: __ZN4Napi8Function3NewIPFNS_5ArrayERKNS_12CallbackInfoEEEES0_P10napi_env__T_PKcPv, symObjAddr: 0x690, symBinAddr: 0x1C00, symSize: 0x100 }
+  - { offset: 0x1362A, size: 0x8, addend: 0x0, symName: __ZN4Napi8Function3NewIPFvRKNS_12CallbackInfoEEEES0_P10napi_env__T_PKcPv, symObjAddr: 0x790, symBinAddr: 0x1D00, symSize: 0x100 }
+  - { offset: 0x13964, size: 0x8, addend: 0x0, symName: __ZN4Napi8Function3NewIPFNS_6StringERKNS_12CallbackInfoEEEES0_P10napi_env__T_PKcPv, symObjAddr: 0x890, symBinAddr: 0x1E00, symSize: 0x100 }
+  - { offset: 0x13C9E, size: 0x8, addend: 0x0, symName: _node_api_module_get_api_version_v1, symObjAddr: 0x990, symBinAddr: 0x1F00, symSize: 0x10 }
+  - { offset: 0x13D71, size: 0x8, addend: 0x0, symName: _napi_register_module_v1, symObjAddr: 0x9A0, symBinAddr: 0x1F10, symSize: 0x20 }
+  - { offset: 0x13E70, size: 0x8, addend: 0x0, symName: __ZN4Napi15ObjectReferenceD2Ev, symObjAddr: 0x9C0, symBinAddr: 0x1F30, symSize: 0x40 }
+  - { offset: 0x13EE5, size: 0x8, addend: 0x0, symName: __ZNK4Napi3Env9UndefinedEv, symObjAddr: 0xA00, symBinAddr: 0x1F70, symSize: 0x90 }
+  - { offset: 0x141CB, size: 0x8, addend: 0x0, symName: __ZN4Napi5Error3NewEP10napi_env__, symObjAddr: 0xA90, symBinAddr: 0x2000, symSize: 0x160 }
+  - { offset: 0x14421, size: 0x8, addend: 0x0, symName: __ZNK4Napi5Error26ThrowAsJavaScriptExceptionEv, symObjAddr: 0xBF0, symBinAddr: 0x2160, symSize: 0x100 }
+  - { offset: 0x14429, size: 0x8, addend: 0x0, symName: __ZN4Napi5ErrorD1Ev, symObjAddr: 0xCF0, symBinAddr: 0x2260, symSize: 0x50 }
+  - { offset: 0x14726, size: 0x8, addend: 0x0, symName: __ZN4Napi5ErrorD1Ev, symObjAddr: 0xCF0, symBinAddr: 0x2260, symSize: 0x50 }
+  - { offset: 0x14AE5, size: 0x8, addend: 0x0, symName: __ZN4Napi5ErrorC2EP10napi_env__P12napi_value__, symObjAddr: 0xD40, symBinAddr: 0x22B0, symSize: 0x140 }
+  - { offset: 0x14E83, size: 0x8, addend: 0x0, symName: __ZNK4Napi5Error5ValueEv, symObjAddr: 0xE80, symBinAddr: 0x23F0, symSize: 0x1A0 }
+  - { offset: 0x1537C, size: 0x8, addend: 0x0, symName: __ZN4Napi11HandleScopeD1Ev, symObjAddr: 0x1020, symBinAddr: 0x2590, symSize: 0x40 }
+  - { offset: 0x153DC, size: 0x8, addend: 0x0, symName: __ZNK4Napi5Value4TypeEv, symObjAddr: 0x1060, symBinAddr: 0x25D0, symSize: 0xA0 }
+  - { offset: 0x15679, size: 0x8, addend: 0x0, symName: __ZN4Napi7details12CallbackDataIPFNS_5ArrayERKNS_12CallbackInfoEES2_E7WrapperEP10napi_env__P20napi_callback_info__, symObjAddr: 0x1100, symBinAddr: 0x2670, symSize: 0x60 }
+  - { offset: 0x15681, size: 0x8, addend: 0x0, symName: __ZN4Napi7details23default_basic_finalizerINS0_12CallbackDataIPFNS_5ArrayERKNS_12CallbackInfoEES3_EEEEvP10napi_env__PvSC_, symObjAddr: 0x1160, symBinAddr: 0x26D0, symSize: 0x20 }
+  - { offset: 0x15978, size: 0x8, addend: 0x0, symName: __ZN4Napi12CallbackInfoC2EP10napi_env__P20napi_callback_info__, symObjAddr: 0x1180, symBinAddr: 0x26F0, symSize: 0x180 }
+  - { offset: 0x15D88, size: 0x8, addend: 0x0, symName: __ZN4Napi7details12CallbackDataIPFvRKNS_12CallbackInfoEEvE7WrapperEP10napi_env__P20napi_callback_info__, symObjAddr: 0x1300, symBinAddr: 0x2870, symSize: 0x60 }
+  - { offset: 0x15FE5, size: 0x8, addend: 0x0, symName: __ZN4Napi7details12CallbackDataIPFNS_6StringERKNS_12CallbackInfoEES2_E7WrapperEP10napi_env__P20napi_callback_info__, symObjAddr: 0x1380, symBinAddr: 0x28F0, symSize: 0x60 }
+  - { offset: 0x15FED, size: 0x8, addend: 0x0, symName: __ZN4Napi7details23default_basic_finalizerINS0_12CallbackDataIPFNS_6StringERKNS_12CallbackInfoEES3_EEEEvP10napi_env__PvSC_, symObjAddr: 0x13E0, symBinAddr: 0x2950, symSize: 0x14 }
+  - { offset: 0x23FAF, size: 0x8, addend: 0x0, symName: __Z12GetFileNamesN4Napi3EnvE, symObjAddr: 0x30, symBinAddr: 0x2970, symSize: 0x2A0 }
+  - { offset: 0x2421B, size: 0x8, addend: 0x0, symName: __ZN4Napi5Array3NewEP10napi_env__, symObjAddr: 0x2D0, symBinAddr: 0x2C10, symSize: 0x90 }
+  - { offset: 0x24594, size: 0x8, addend: 0x0, symName: __ZNK4Napi6Object3SetINS_6StringEEEbjRKT_, symObjAddr: 0x360, symBinAddr: 0x2CA0, symSize: 0x100 }
+  - { offset: 0x24E37, size: 0x8, addend: 0x0, symName: __Z14WriteFileNamesN4Napi3EnvENS_5ArrayE, symObjAddr: 0x560, symBinAddr: 0x2DA0, symSize: 0x190 }
+  - { offset: 0x25430, size: 0x8, addend: 0x0, symName: __ZNK4Napi5Array6LengthEv, symObjAddr: 0x6F0, symBinAddr: 0x2F30, symSize: 0x90 }
+  - { offset: 0x25657, size: 0x8, addend: 0x0, symName: __Z7GetTextN4Napi3EnvE, symObjAddr: 0x780, symBinAddr: 0x2FC0, symSize: 0x90 }
+  - { offset: 0x256CB, size: 0x8, addend: 0x0, symName: __Z9WriteTextN4Napi3EnvERKNS_6StringE, symObjAddr: 0x810, symBinAddr: 0x3050, symSize: 0xF0 }
+  - { offset: 0x256D3, size: 0x8, addend: 0x0, symName: __ZNK4Napi6String9Utf8ValueEv, symObjAddr: 0x900, symBinAddr: 0x3140, symSize: 0x1A0 }
+  - { offset: 0x25E0D, size: 0x8, addend: 0x0, symName: __ZNK4Napi6String9Utf8ValueEv, symObjAddr: 0x900, symBinAddr: 0x3140, symSize: 0x1A0 }
+  - { offset: 0x26867, size: 0x8, addend: 0x0, symName: __ZN4Napi6String3NewEP10napi_env__PKcm, symObjAddr: 0x1150, symBinAddr: 0x32E0, symSize: 0x90 }
+  - { offset: 0x26AB4, size: 0x8, addend: 0x0, symName: __ZNK4Napi6Object3GetEj, symObjAddr: 0x11E0, symBinAddr: 0x3370, symSize: 0x95 }
+...

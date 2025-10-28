@@ -7,7 +7,9 @@
 	"files": [
 		"lib",
 		"src",
-		"binding.gyp"
+		"test",
+		"binding.gyp",
+		"README.md"
 	],
 	"author": "alex.wei",
 	"license": "MIT",
@@ -23,7 +25,7 @@
 	"scripts": {
 		"publishNpm": "npm publish --registry https://registry.npmjs.org/ --access public",
 		"rebuild": "node-pre-gyp rebuild",
-		"build": "node-pre-gyp rebuild && npm run copy-binary",
+		"build": "node-pre-gyp rebuild",
 		"test": "node ./test/run-tests.js",
 		"test:files": "node -e \"const c=require('./lib'); c.writeFiles([]); console.log('Files:', c.readFiles())\"",
 		"test:text": "node -e \"const c=require('./lib'); c.writeText('test'); console.log('Text:', c.readText())\"",
