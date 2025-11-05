@@ -73,16 +73,6 @@
           "files": [ "<(PRODUCT_DIR)/<(module_name).node" ],
           "destination": "<(module_path)"
         },
-        {
-          "files": [ "<(PRODUCT_DIR)/<(module_name).node.dSYM" ],
-          "destination": "<(module_path)",
-          "conditions": [ ["OS=='darwin'", {}] ]
-        },
-        {
-          "files": [ "<(PRODUCT_DIR)/<(module_name).pdb" ],
-          "destination": "<(module_path)",
-          "conditions": [ ["OS=='win'", {}] ]
-        }
       ]
     }
     ]
