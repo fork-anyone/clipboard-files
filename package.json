@@ -1,6 +1,6 @@
 {
 	"name": "@fork-anyone/clipboard-files",
-	"version": "3.0.7",
+	"version": "3.0.8",
 	"description": "A nodejs addon, read or write file paths for clipboard, supports win32 and mac osx",
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",

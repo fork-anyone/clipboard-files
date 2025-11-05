@@ -1,5 +1,4 @@
-declare module "clipboard-files" {
-  /**
+/**
    * Read file paths from system clipboard
    * @returns Array of file paths
    */
@@ -24,4 +23,3 @@ declare module "clipboard-files" {
   export function writeText(text: string): void;
 
   export function version(): string;
-}
