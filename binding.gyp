@@ -74,8 +74,24 @@
         {
           "files": [ "<(PRODUCT_DIR)/<(module_name).node" ],
           "destination": "<(module_path)"
-        },
+        }
+      ],
+      "actions": [
+        {
+          "action_name": "zip_debug_symbols",
+          "inputs": [],
+          "outputs": [ "<(module_path)/<(module_name).node.dSYM.zip" ],
+            "action": [
+            "python3",
+            "scripts/zip_debug.py",
+            "<(PRODUCT_DIR)",
+            "<(module_name)",
+            "<(module_path)",
+            "<(target_arch)",
+            "<(OS)"
+          ]
+        }
       ]
     }
-    ]
+  ]
 }
