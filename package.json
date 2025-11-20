@@ -40,6 +40,6 @@
 		"module_path": "./lib/binding/napi-{platform}-{arch}",
 		"remote_path": "./",
 		"package_name": "napi-{module_name}-{platform}-{arch}.tar.gz",
-		"host": "https://localhost"
+		"host": "https://github.com/fork-anyone/clipboard-files/releases/download/"
 	}
 }
