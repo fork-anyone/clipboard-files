@@ -28,11 +28,11 @@ export function version(): string;
  * Read file paths from system clipboard (async)
  * @param callback Node-style callback: (err, filePaths) => void
  */
-export function readFilesAsync(callback: (err: Error | null, filePaths: string[]) => void): void;
+export function readFilesAsync(): Promise<string[]>;
 
 /**
  * Write file paths to system clipboard (async)
  * @param callback Node-style callback: (err) => void
  * @param filePaths Array of file paths to write to clipboard
  */
-export function writeFilesAsync(callback: (err: Error | null) => void, filePaths?: string[]): void;
+export function writeFilesAsync(): Promise<string[]>;
