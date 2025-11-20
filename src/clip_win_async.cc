@@ -12,7 +12,8 @@ protected:
     void Execute() override
     {
         Napi::Array arr = GetFileNames(Env()); // 复用已有的同步实现，但放在后台线程
-        for (size_t i = 0; i < arr.Length(); ++i) {
+        for (size_t i = 0; i < arr.Length(); ++i)
+        {
             result_.push_back(arr.Get(i).ToString().Utf8Value());
         }
     }
@@ -36,7 +37,8 @@ public:
         : AsyncWorker(cb)
     {
         uint32_t len = files.Length();
-        for (uint32_t i = 0; i < len; ++i) {
+        for (uint32_t i = 0; i < len; ++i)
+        {
             files_.push_back(files.Get(i).As<Napi::String>().Utf8Value());
         }
     }
@@ -44,7 +46,13 @@ public:
 protected:
     void Execute() override
     {
-        WriteFileNames(Env(), files_); // 需同步实现支持 vector<string>
+        Napi::Env env = Env();
+        Napi::Array arr = Napi::Array::New(env, files_.size());
+        for (size_t i = 0; i < files_.size(); ++i)
+        {
+            arr.Set(i, Napi::String::New(env, files_[i]));
+        }
+        WriteFileNames(env, arr);
     }
     void OnOK() override
     {
