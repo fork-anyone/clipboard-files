@@ -31,14 +31,18 @@ private:
 class WriteFilesWorker : public Napi::AsyncWorker {
 public:
     WriteFilesWorker(Napi::Function& cb, const Napi::Array& files)
-        : AsyncWorker(cb), files_(files) {}
+        : AsyncWorker(cb) {
+        uint32_t len = files.Length();
+        for (uint32_t i = 0; i < len; ++i) {
+            std::string s = files.Get(i).As<Napi::String>();
+            files_.push_back(s);
+        }
+    }
 protected:
     void Execute() override {
-        uint32_t len = files_.Length();
         NSMutableArray* paths = [NSMutableArray array];
-        for (uint32_t i = 0; i < len; ++i) {
-            std::string s = files_.Get(i).As<Napi::String>();
-            [paths addObject:[NSString stringWithUTF8String:s.c_str()]];
+        for (const std::string& path : files_) {
+            [paths addObject:[NSString stringWithUTF8String:path.c_str()]];
         }
         @autoreleasepool {
             NSPasteboard* pb = [NSPasteboard generalPasteboard];
@@ -50,7 +54,7 @@ protected:
         Callback().Call({Env().Null()});
     }
 private:
-    Napi::Array files_;
+    std::vector<std::string> files_;
 };
 
 Napi::Value GetFileNamesAsync(const Napi::CallbackInfo& info) {

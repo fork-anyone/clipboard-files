@@ -8,7 +8,7 @@ const testFiles = [
   path.resolve(__dirname, '..', 'package.json'),
 ];
 
-// ==== 同步测试 ====
+// --- 同步测试 ---
 function testSync() {
   console.log('🧪 开始同步测试...\n');
   console.log(`📋 测试平台: ${process.platform}`);
@@ -45,37 +45,35 @@ function testSync() {
   console.log('🎉 同步测试全部通过！\n');
 }
 
-// ==== 异步测试 ====
-function testAsync() {
-  return new Promise((resolve, reject) => {
-    console.log('🧪 开始异步测试...\n');
+// --- 异步测试（Promise 风格） ---
+async function testAsync() {
+  console.log('🧪 开始异步测试...\n');
 
-    let alive = 0;
-    const heartbeat = setInterval(() => {
-      console.log(`[心跳] 主线程仍存活 (${++alive})`);
-    }, 300);
+  const testPaths = [__filename];
 
-    const testPaths = [__filename];
+  // 写文件
+  await clipboard.writeFilesAsync(testPaths);
+  console.log('✅ writeFilesAsync 写入成功');
 
-    clipboard.writeFilesAsync((err) => {
-      if (err) return reject(err);
-      console.log('✅ writeFilesAsync 写入成功');
+  // 读文件
+  const paths = await clipboard.readFilesAsync();
+  assert.strictEqual(paths.length, 1);
+  assert.strictEqual(paths[0], __filename);
+  console.log('✅ readFilesAsync 读取成功');
 
-      clipboard.readFilesAsync((err, paths) => {
-        if (err) return reject(err);
-        assert.strictEqual(paths.length, 1);
-        assert.strictEqual(paths[0], __filename);
-        console.log('✅ readFilesAsync 读取成功');
+  // 并发读写
+  const tasks = Array(3).fill(null).map((_, i) =>
+    clipboard.writeFilesAsync([...testPaths, String(i)])
+      .then(() => clipboard.readFilesAsync())
+      .then(result => assert.strictEqual(result.length, 2))
+  );
+  await Promise.all(tasks);
+  console.log('✅ 并发读写测试通过');
 
-        clearInterval(heartbeat);
-        console.log('🎉 异步测试全部通过！\n');
-        resolve();
-      });
-    }, testPaths);
-  });
+  console.log('🎉 异步测试全部通过！\n');
 }
 
-// ==== 统一入口 ====
+// --- 统一入口 ---
 async function runAllTests() {
   try {
     testSync();        // 同步测试

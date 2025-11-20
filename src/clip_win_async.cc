@@ -32,13 +32,19 @@ private:
 class WriteFilesWorker : public Napi::AsyncWorker
 {
 public:
-    WriteFilesWorker(Napi::Function &cb, Napi::Array &files)
-        : AsyncWorker(cb), files_(files) {}
+    WriteFilesWorker(Napi::Function &cb, const Napi::Array &files)
+        : AsyncWorker(cb)
+    {
+        uint32_t len = files.Length();
+        for (uint32_t i = 0; i < len; ++i) {
+            files_.push_back(files.Get(i).As<Napi::String>().Utf8Value());
+        }
+    }
 
 protected:
     void Execute() override
     {
-        WriteFileNames(Env(), files_); // 复用同步实现
+        WriteFileNames(Env(), files_); // 需同步实现支持 vector<string>
     }
     void OnOK() override
     {
@@ -46,7 +52,7 @@ protected:
     }
 
 private:
-    Napi::Array files_;
+    std::vector<std::string> files_;
 };
 
 Napi::Value GetFileNamesAsync(const Napi::CallbackInfo &info)
