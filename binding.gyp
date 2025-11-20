@@ -19,7 +19,8 @@
                     '__MACOSX__'
                 ],
                 "sources": [
-                    "src/clip_osx.mm"
+                    "src/clip_osx.mm",
+                    "src/clip_osx_async.mm"
                 ],
                 "xcode_settings": {
                     "ONLY_ACTIVE_ARCH": "YES",
@@ -49,7 +50,8 @@
 				    '__WIN32__'
 			    ],
                 "sources": [
-                    "src/clip_win.cc"
+                    "src/clip_win.cc",
+                    "src/clip_win_async.cc"
                 ],
                 "msvs_settings": {
                     "VCCLCompilerTool": {

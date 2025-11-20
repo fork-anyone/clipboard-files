@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { runTests } = require('./index');
+const { runAllTests } = require('./index');
 
 console.log('🔍 运行跨平台测试...');
 console.log(`🖥️  操作系统: ${process.platform}`);
@@ -19,4 +19,4 @@ try {
 }
 
 // 运行测试
-runTests();
+runAllTests();
