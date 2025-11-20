@@ -35,4 +35,4 @@ export function readFilesAsync(): Promise<string[]>;
  * @param callback Node-style callback: (err) => void
  * @param filePaths Array of file paths to write to clipboard
  */
-export function writeFilesAsync(): Promise<string[]>;
+export function writeFilesAsync(files: string[]): Promise<string[]>;
