@@ -31,6 +31,8 @@
 				'MACOSX_DEPLOYMENT_TARGET': '10.13',
 				'EXCUTABLE_EXTENSION': 'node',
 				'GCC_ENABLE_CPP_EXCEPTIONS': 'YES',
+				'DEBUG_INFORMATION_FORMAT': 'dwarf-with-dsym',
+				'GCC_GENERATE_DEBUGGING_SYMBOLS': 'YES',
 				'OTHER_CFLAGS': [
 					'-ObjC++',
 					# '-std=c++14'
@@ -68,6 +70,14 @@
 			"copies": [
 				{
 				"files": [ "<(PRODUCT_DIR)/<(module_name).pdb" ],
+				"destination": "<(module_path)"
+				}
+			]
+			}],
+			["OS=='mac'", {
+			"copies": [
+				{
+				"files": [ "<(PRODUCT_DIR)/<(module_name).node.dSYM" ],
 				"destination": "<(module_path)"
 				}
 			]

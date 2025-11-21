@@ -35,9 +35,8 @@
 		"host": "https://localhost"
 	},
 	"scripts": {
-		"build": "node-pre-gyp rebuild",
-		"build-electron": "electron-rebuild .",
-		"build-electron-ia32": "electron-rebuild . --arch=ia32",
+		"build": "electron-rebuild .",
+		"build-ia32": "electron-rebuild . --arch=ia32",
 		"publishNpm": "npm publish --registry https://registry.npmjs.org/ --access public",
 		"test": "node ./test"
 	},

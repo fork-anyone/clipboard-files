@@ -1,0 +1,26 @@
+---
+triple:          'x86_64-apple-darwin'
+binary-path:     './Release/binding.node'
+relocations:
+  - { offset: 0x28, size: 0x8, addend: 0x0, symName: __ZN9clipboard9readFilesERKN2v820FunctionCallbackInfoINS0_5ValueEEE, symObjAddr: 0x0, symBinAddr: 0xDF0, symSize: 0x40 }
+  - { offset: 0x60, size: 0x8, addend: 0x0, symName: __ZN9clipboardL7_moduleE, symObjAddr: 0x2B0, symBinAddr: 0x2290, symSize: 0x0 }
+  - { offset: 0x148, size: 0x8, addend: 0x0, symName: __ZN4node15NODE_SET_METHODEN2v85LocalINS0_6ObjectEEEPKcPFvRKNS0_20FunctionCallbackInfoINS0_5ValueEEEE, symObjAddr: 0xF0, symBinAddr: 0xEE0, symSize: 0x100 }
+  - { offset: 0x1514D, size: 0x8, addend: 0x0, symName: __ZN9clipboard9readFilesERKN2v820FunctionCallbackInfoINS0_5ValueEEE, symObjAddr: 0x0, symBinAddr: 0xDF0, symSize: 0x40 }
+  - { offset: 0x1524E, size: 0x8, addend: 0x0, symName: __ZN9clipboard10writeFilesERKN2v820FunctionCallbackInfoINS0_5ValueEEE, symObjAddr: 0x40, symBinAddr: 0xE30, symSize: 0x70 }
+  - { offset: 0x153A1, size: 0x8, addend: 0x0, symName: __ZN9clipboard4InitEN2v85LocalINS0_6ObjectEEE, symObjAddr: 0xB0, symBinAddr: 0xEA0, symSize: 0x40 }
+  - { offset: 0x1553C, size: 0x8, addend: 0x0, symName: _node_register_module_v93, symObjAddr: 0x1F0, symBinAddr: 0xFE0, symSize: 0x40 }
+  - { offset: 0x155B4, size: 0x8, addend: 0x0, symName: __ZN9clipboardL17_register_bindingEv, symObjAddr: 0x230, symBinAddr: 0x1020, symSize: 0x11 }
+  - { offset: 0x18DDD, size: 0x8, addend: 0x0, symName: __Z14get_file_namesPN2v87IsolateE, symObjAddr: 0x0, symBinAddr: 0x1040, symSize: 0x2A0 }
+  - { offset: 0x20F32, size: 0x8, addend: 0x0, symName: __ZNSt3__120__throw_length_errorB8ne180100EPKc, symObjAddr: 0x6F0, symBinAddr: 0x1730, symSize: 0x50 }
+  - { offset: 0x22603, size: 0x8, addend: 0x0, symName: __ZSt28__throw_bad_array_new_lengthB8ne180100v, symObjAddr: 0x770, symBinAddr: 0x17B0, symSize: 0x40 }
+  - { offset: 0x22E45, size: 0x8, addend: 0x0, symName: __Z14get_file_namesPN2v87IsolateE, symObjAddr: 0x0, symBinAddr: 0x1040, symSize: 0x2A0 }
+  - { offset: 0x23987, size: 0x8, addend: 0x0, symName: __Z16write_file_namesPN2v87IsolateENS_5LocalINS_5ArrayEEE, symObjAddr: 0x2A0, symBinAddr: 0x12E0, symSize: 0x3D0 }
+  - { offset: 0x24993, size: 0x8, addend: 0x0, symName: __ZNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEED1B8ne180100Ev, symObjAddr: 0x670, symBinAddr: 0x16B0, symSize: 0x70 }
+  - { offset: 0x24CEA, size: 0x8, addend: 0x0, symName: __ZNKSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE20__throw_length_errorB8ne180100Ev, symObjAddr: 0x6E0, symBinAddr: 0x1720, symSize: 0x10 }
+  - { offset: 0x24CF2, size: 0x8, addend: 0x0, symName: __ZNSt3__120__throw_length_errorB8ne180100EPKc, symObjAddr: 0x6F0, symBinAddr: 0x1730, symSize: 0x50 }
+  - { offset: 0x24D58, size: 0x8, addend: 0x0, symName: __ZNSt12length_errorC1B8ne180100EPKc, symObjAddr: 0x740, symBinAddr: 0x1780, symSize: 0x30 }
+  - { offset: 0x252CE, size: 0x8, addend: 0x0, symName: __ZNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEE21__push_back_slow_pathIRKS6_EEPS6_OT_, symObjAddr: 0x7B0, symBinAddr: 0x17F0, symSize: 0x1F0 }
+  - { offset: 0x25C35, size: 0x8, addend: 0x0, symName: __ZNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE25__init_copy_ctor_externalEPKcm, symObjAddr: 0x9A0, symBinAddr: 0x19E0, symSize: 0x90 }
+  - { offset: 0x2617D, size: 0x8, addend: 0x0, symName: __ZNSt3__114__split_bufferINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERNS4_IS6_EEED1Ev, symObjAddr: 0xA30, symBinAddr: 0x1A70, symSize: 0x60 }
+  - { offset: 0x264E2, size: 0x8, addend: 0x0, symName: __ZNKSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEE20__throw_length_errorB8ne180100Ev, symObjAddr: 0xA90, symBinAddr: 0x1AD0, symSize: 0x10 }
+...
