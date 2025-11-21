@@ -4,3 +4,4 @@ yarn-error.log
 package-lock.json
 .DS_Store
 node_modules
+bin/darwin-arm64-110/clipboard-files.node
