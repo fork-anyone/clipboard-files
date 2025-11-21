@@ -1,6 +1,6 @@
 {
 	"name": "@fork-anyone/clipboard-files",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"description": "fork clipboard-files, A nodejs addon, read or write file path for clipboard, support win32 and mac osx",
 	"keywords": [
 		"clipboard",
@@ -20,31 +20,35 @@
 		"lib": "lib",
 		"test": "test"
 	},
+	"files": [
+		"lib/",
+		"src/",
+		"binding.gyp",
+		"README.md",
+		"LICENSE"
+	],
 	"binary": {
 		"module_name": "binding",
 		"module_path": "./lib/binding/{node_abi}-{platform}-{arch}/",
 		"remote_path": "v{version}",
 		"package_name": "{node_abi}-{platform}-{arch}.tar.gz",
-		"host": "https://github.com/alex8088/clipboard-files/releases/download/"
+		"host": "https://localhost"
 	},
 	"scripts": {
-		"build": "cd build && node -v &&  xcodebuild && cd ..",
-		"configure": "node-gyp configure --target=v22.3.13  --runtime=electron --openssl_fips='' --dist-url=https://electronjs.org/headers --python /usr/local/bin/python3 -- -f xcode",
-		"postinstall": "npm run build",
+		"build": "node-pre-gyp rebuild",
+		"build-electron": "electron-rebuild .",
 		"publishNpm": "npm publish --registry https://registry.npmjs.org/ --access public",
-		"rebuild": "node-gyp clean && npm run configure && npm run build",
-		"test": "node ./test",
-		"build-node": "node-gyp rebuild --target=16.17.1",
-		"build-electron": "electron-rebuild --version v22.3.13 --dist-url https://npm.taobao.org/mirrors/electron",
-		"build-ia32": "electron-rebuild --version v22.3.13 --dist-url https://npm.taobao.org/mirrors/electron --arch ia32"
+		"test": "node ./test"
 	},
 	"dependencies": {
 		"nan": "^2.13.2"
 	},
 	"devDependencies": {
 		"@mapbox/node-pre-gyp": "^1.0.11",
-		"electron": "^22.3.13",
 		"node-gyp": "^10.2.0"
+	},
+	"optionalDependencies": {
+		"electron": "^22.3.13"
 	},
 	"volta": {
 		"node": "16.17.1"
