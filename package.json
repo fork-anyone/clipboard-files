@@ -37,6 +37,7 @@
 	"scripts": {
 		"build": "node-pre-gyp rebuild",
 		"build-electron": "electron-rebuild .",
+		"build-electron-ia32": "electron-rebuild . --arch=ia32",
 		"publishNpm": "npm publish --registry https://registry.npmjs.org/ --access public",
 		"test": "node ./test"
 	},
@@ -45,6 +46,7 @@
 	},
 	"devDependencies": {
 		"@mapbox/node-pre-gyp": "^1.0.11",
+		"@electron/rebuild": "^3.7.2",
 		"node-gyp": "^10.2.0"
 	},
 	"optionalDependencies": {
