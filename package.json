@@ -48,7 +48,7 @@
 		"node-gyp": "^10.2.0"
 	},
 	"optionalDependencies": {
-		"electron": "^22.3.13"
+		"electron": "22.3.13"
 	},
 	"volta": {
 		"node": "16.17.1"
